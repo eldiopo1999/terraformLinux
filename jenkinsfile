@@ -1,0 +1,28 @@
+pipeline {
+     agent any
+     stages {
+         stage('SCM Checkout') {
+              steps {
+                 git(branch: 'master', credentialsId: 'eldiopo1999',  url: 'git@github.com:eldiopo1999/terraformLinux.git')
+              }
+         }
+	 stage('Fomrate') {
+               steps{
+	         sh "terraform fmt"
+			  }
+          }
+     
+         stage('Refresh') {
+              steps{
+	         sh "terraform refresh"
+		}
+          }
+     
+         stage('Validate') {
+             steps{
+		 sh  "terraform validate"
+	       }
+        }
+	
+   }
+}
