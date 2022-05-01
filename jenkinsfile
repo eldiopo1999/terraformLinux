@@ -3,24 +3,24 @@ pipeline {
      stages {
          stage('SCM Checkout') {
               steps {
-                 git(branch: 'master', credentialsId: 'eldiopo1999',  url: 'git@github.com:eldiopo1999/terraformLinux.git')
+                 git(branch: 'main', credentialsId: 'eldiopo',  url: 'https://github.com/eldiopo1999/terraformLinux.git')
               }
          }
 	 stage('Fomrate') {
                steps{
-	         sh "terraform fmt"
+	         sh label: '', script: 'terraform fmt'
 			  }
           }
      
          stage('Refresh') {
               steps{
-	         sh "terraform refresh"
+	         sh label: '', script: 'terraform refresh'
 		}
           }
      
          stage('Validate') {
              steps{
-		 sh  "terraform validate"
+		 sh label: '', script: 'terraform validate'
 	       }
         }
 	
