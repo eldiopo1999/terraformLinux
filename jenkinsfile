@@ -6,22 +6,34 @@ pipeline {
                  git(branch: 'main', credentialsId: 'eldiopo',  url: 'https://github.com/eldiopo1999/terraformLinux.git')
               }
          }
-	 stage('Fomrate') {
+	 stage('Initialise') {
                steps{
-	         sh label: '', script: 'terraform fmt'
+	         sh label: '', script: 'terraform init'
 			  }
           }
      
-         stage('Refresh') {
+         stage('Formate') {
               steps{
-	         sh label: '', script: 'terraform refresh'
+	         sh label: '', script: 'terraform fmt'
 		}
           }
      
-         stage('Validate') {
+         stage('Refresh') {
              steps{
-		 sh label: '', script: 'terraform validate'
+		 sh label: '', script: 'terraform refresh'
 	       }
+        }
+        
+        stage('Validate') {
+             steps{
+                 sh label: '', script: 'terraform validate'
+               }
+        }
+
+        stage('Plan') {
+             steps{
+                 sh label: '', script: 'terraform plan'
+               }
         }
 	
    }
